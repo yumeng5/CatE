@@ -1,0 +1,3 @@
+# Yelp dataset challenge
+
+This dataset has two sets of maually-labeled categories, food and sentiment. The category names are in `food.txt` and `senti.txt`, respectively. Every line in `phrase_text.txt` is one document, and every line in `label.txt` is the ground-truth labels of the corresponding document. The document labels are only used in classification evaluation and not needed for topic mining.

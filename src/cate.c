@@ -1068,7 +1068,8 @@ int main(int argc, char **argv) {
     printf("\t-pretrain <int>\n");
     printf("\t\tSet the number of iterations to pretrain on the corpus (without performing topic mining); default is 2\n");
     printf("\t-expand <int>\n");
-    printf("\t\tSet the number of terms to be added per topic; default is 1\n");printf("\t-window <int>\n");
+    printf("\t\tSet the number of terms to be added per topic per iteration; default is 1\n");
+    printf("\t-window <int>\n");
     printf("\t\tSet max skip length between words; default is 5\n");
     printf("\t-sample <float>\n");
     printf("\t\tSet threshold for occurrence of words. Those that appear with higher frequency in the training data\n");
