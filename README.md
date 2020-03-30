@@ -23,9 +23,9 @@ You will need to first create a directory under `datasets` (e.g., `datasets/your
 
 You can use any tool to pre-process the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory.
 
-## Hyperparameters
+## Command Line Arguments
 
-Invoke the command without arguments for a list of hyperparameters and their meanings:
+Invoke the command without arguments for a list of parameters and their meanings:
 ```
 $ ./src/cate
 Parameters:
