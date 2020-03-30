@@ -44,7 +44,7 @@ Parameters:
 
         ##########   Embedding Training:   ##########
         -size <int>
-                Set dimension of word embeddings; default is 100
+                Set dimension of text embeddings; default is 100
         -iter <int>
                 Set the number of iterations to train on the corpus (performing topic mining); default is 5
         -pretrain <int>

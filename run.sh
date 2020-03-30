@@ -9,7 +9,13 @@ topic_file=locations.txt
 
 topic=$(echo ${topic_file} | cut -d'.' -f 1)
 
+# load pretrained word2vec embedding
 pretrain_emb=word2vec_100.txt
+
+if [ ! -f "$pretrain_emb" ] && [ -f "word2vec_100.zip" ]; then
+    echo "Unzipping downloaded pretrained embedding"
+    unzip word2vec_100.zip && rm word2vec_100.zip
+fi
 
 cd src
 make cate

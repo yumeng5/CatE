@@ -1062,7 +1062,7 @@ int main(int argc, char **argv) {
 
     printf("\n\t##########   Embedding Training:   ##########\n");
     printf("\t-size <int>\n");
-    printf("\t\tSet dimension of word embeddings; default is 100\n");
+    printf("\t\tSet dimension of text embeddings; default is 100\n");
     printf("\t-iter <int>\n");
     printf("\t\tSet the number of iterations to train on the corpus (performing topic mining); default is 5\n");
     printf("\t-pretrain <int>\n");
@@ -1108,9 +1108,6 @@ int main(int argc, char **argv) {
   // if ((i = ArgPos((char *) "-context", argc, argv)) > 0) strcpy(context_output, argv[i + 1]);
   // if ((i = ArgPos((char *) "-doc", argc, argv)) > 0) strcpy(doc_output, argv[i + 1]);
   if ((i = ArgPos((char *) "-topic-emb", argc, argv)) > 0) strcpy(topic_output, argv[i + 1]);
-  if ((i = ArgPos((char *) "-global-lambda", argc, argv)) > 0) global_lambda = atof(argv[i + 1]);
-  if ((i = ArgPos((char *) "-topic-lambda", argc, argv)) > 0) topic_lambda = atof(argv[i + 1]);
-  if ((i = ArgPos((char *) "-spec-lambda", argc, argv)) > 0) spec_lambda = atof(argv[i + 1]);
   if ((i = ArgPos((char *) "-spec", argc, argv)) > 0) {
     strcpy(spec_file, argv[i + 1]);
     with_spec = 1;
@@ -1122,7 +1119,6 @@ int main(int argc, char **argv) {
   if ((i = ArgPos((char *) "-pretrain", argc, argv)) > 0) pretrain_iters = atoi(argv[i + 1]);
   if ((i = ArgPos((char *) "-load-emb", argc, argv)) > 0) strcpy(load_emb_file, argv[i + 1]);
   if ((i = ArgPos((char *) "-window", argc, argv)) > 0) window = atoi(argv[i + 1]);
-  if ((i = ArgPos((char *) "-inter", argc, argv)) > 0) words_per_reg = atoi(argv[i + 1]);
   if ((i = ArgPos((char *) "-sample", argc, argv)) > 0) sample = atof(argv[i + 1]);
   if ((i = ArgPos((char *) "-negative", argc, argv)) > 0) negative = atoi(argv[i + 1]);
   if ((i = ArgPos((char *) "-threads", argc, argv)) > 0) num_threads = atoi(argv[i + 1]);

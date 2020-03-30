@@ -13,12 +13,15 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 
 # dataset directory
-# CORPUS_DIR=../datasets/YOUR_CORPUS
-CORPUS_DIR=../datasets/nyt
+CORPUS_DIR=../datasets/YOUR_CORPUS
 
 # raw text file
 CORPUS_FILE=text.txt
 
+if [ ! -d "AutoPhrase" ] && [ -f "AutoPhrase.zip" ]; then
+    echo "Unzipping AutoPhrase"
+    unzip AutoPhrase.zip && rm AutoPhrase.zip
+fi
 
 echo ${green}===Corpus Pre-processing===${reset}
 python utils.py --mode 0 --dataset ${CORPUS_DIR} --in_file ${CORPUS_FILE} --out_file ./AutoPhrase/data/text.txt
