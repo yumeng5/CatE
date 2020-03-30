@@ -19,9 +19,13 @@ You will need to first create a directory under `datasets` (e.g., `datasets/your
 * A text file of the corpus, e.g., `datasets/your_dataset/text.txt`. **Note: When preparing the text corpus, make sure each line in the file is one document/paragraph.**
 * A text file with the category names/keywords for each category, e.g., `datasets/your_dataset/topics.txt` where each line contains the seed words for one category. You can provide arbitrary number of seed words in each line (at least 1 per category; if there are multiple seed words, separate them with whitespace characters). **Note: You need to ensure that every provided seed word appears in the vocabulary of the corpus.**
 
-### Pre-processing
+### Preprocessing
 
-You can use any tool to pre-process the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory.
+You can use any tool to preprocess the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory.
+
+### Pretrained Embedding (Optional)
+
+We provide a 100-dimensional pretrained word2vec embedding `word2vec_100.zip`. You can also use other pretrained embeddings (use the `-load-emb` argument to specify the pretrained embedding file). Pretrained embedding is optional (omit the `-load-emb` argument if you do not use pretrained embedding), but generally will result in better embedding initialization and higher-quality topic mining results.
 
 ## Command Line Arguments
 
