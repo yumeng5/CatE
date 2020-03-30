@@ -6,11 +6,22 @@ The source code used for Discriminative Topic Mining via Category-Name Guided Te
 
 * GCC compiler (used to compile the source c file): See the [guide for installing GCC](https://gcc.gnu.org/wiki/InstallingGCC).
 
-## Run the Code
+## Example Datasets
 
-We provide a shell script ``run.sh`` for compiling the source file and performing topic mining on an example corpus.
+We provide two example datasets, the [New York Times annotated corpus](datasets/nyt/) and the [Yelp dataset challenge](datasets/yelp/), which are used in the paper. We also provide a shell script ``run.sh`` for compiling the source code and performing topic mining on the two example datasets. You should be able to obtain similar results as reported in the paper.
 
-**Note: When preparing the training text corpus, make sure each line in the file is one document/paragraph.**
+## Preparing Your Datasets
+
+### Corpus and Inputs
+
+You will need to first create a directory under `datasets` (e.g., `datasets/your_dataset`) and put two files in it:
+
+* A text file of the corpus, e.g., `datasets/your_dataset/text.txt`. **Note: When preparing the text corpus, make sure each line in the file is one document/paragraph.**
+* A text file with the category names/keywords for each category, e.g., `datasets/your_dataset/topics.txt` where each line contains the seed words for one category. You can provide arbitrary number of seed words in each line (at least 1 per category; if there are multiple seed words, separate them with whitespace characters). **Note: You need to ensure that every provided seed word appears in the vocabulary of the corpus.**
+
+### Pre-processing
+
+You can use any tool to pre-process the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory.
 
 ## Hyperparameters
 
