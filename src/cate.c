@@ -17,7 +17,7 @@
 #define MAX_WORDS_TOPIC 1000
 
 const int vocab_hash_size = 30000000;  // Maximum 30 * 0.7 = 21M words in the vocabulary
-const int corpus_max_size = 30000000;  // Maximum 30M documents in the corpus
+const int corpus_max_size = 40000000;  // Maximum 30M documents in the corpus
 const int topic_max_num = 1000;  // Maximum 1000 topics in the corpus
 
 typedef float real;                    // Precision of float numbers
@@ -185,22 +185,6 @@ int SearchVocab(char *word) {
   return -1;
 }
 
-// Record document length
-void ReadDoc(FILE *fin) {
-  char word[MAX_STRING];
-  long long i;
-  while (1) {
-    ReadWord(word, fin);
-    if (feof(fin)) break;
-    i = SearchVocab(word);
-    if (i == 0) {
-      doc_sizes[corpus_size] = ftell(fin);
-      corpus_size++;
-    } else if (i == -1) continue;
-    else docs[corpus_size]++;
-  }
-}
-
 // Locate line number of current file pointer
 int FindLine(FILE *fin) {
   long long pos = ftell(fin);
@@ -314,6 +298,7 @@ void LearnVocabFromTrainFile() {
   }
   vocab_size = 0;
   AddWordToVocab((char *) "</s>");
+
   while (1) {
     ReadWord(word, fin);
     if (feof(fin)) break;
@@ -326,7 +311,20 @@ void LearnVocabFromTrainFile() {
     if (i == -1) {
       a = AddWordToVocab(word);
       vocab[a].cn = 1;
-    } else vocab[i].cn++;
+    } 
+    else if (i == 0) {
+      vocab[i].cn++;
+      doc_sizes[corpus_size] = ftell(fin);
+      corpus_size++;
+      if (corpus_size >= corpus_max_size) {
+        printf("[ERROR] Number of documents larger than \"corpus_max_size\"! Set a larger \"corpus_max_size\" in Line 20 of cate.c!\n");
+        exit(1);
+      }
+    }
+    else {
+      vocab[i].cn++;
+      docs[corpus_size]++;
+    }
     if (vocab_size > vocab_hash_size * 0.7) ReduceVocab();
   }
   SortVocab();
@@ -334,8 +332,6 @@ void LearnVocabFromTrainFile() {
     printf("Vocab size: %lld\n", vocab_size);
     printf("Words in train file: %lld\n", train_words);
   }
-  fseek(fin, 0, SEEK_SET);
-  ReadDoc(fin);
   file_size = ftell(fin);
   fclose(fin);
 }
