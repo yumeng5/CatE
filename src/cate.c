@@ -17,7 +17,7 @@
 #define MAX_WORDS_TOPIC 1000
 
 const int vocab_hash_size = 30000000;  // Maximum 30 * 0.7 = 21M words in the vocabulary
-const int corpus_max_size = 40000000;  // Maximum 30M documents in the corpus
+const int corpus_max_size = 40000000;  // Maximum 40M documents in the corpus
 const int topic_max_num = 1000;  // Maximum 1000 topics in the corpus
 
 typedef float real;                    // Precision of float numbers
@@ -317,7 +317,7 @@ void LearnVocabFromTrainFile() {
       doc_sizes[corpus_size] = ftell(fin);
       corpus_size++;
       if (corpus_size >= corpus_max_size) {
-        printf("[ERROR] Number of documents larger than \"corpus_max_size\"! Set a larger \"corpus_max_size\" in Line 20 of cate.c!\n");
+        printf("[ERROR] Number of documents in corpus larger than \"corpus_max_size\"! Set a larger \"corpus_max_size\" in Line 20 of cate.c!\n");
         exit(1);
       }
     }
@@ -737,6 +737,7 @@ void *TrainEmb(void *id) {
         for (c = 0; c < layer1_size; c++) syn0[c + l1] += neu1e[c];
         if (with_spec) {
           kappa[last_word] += spec_lambda * kappa_update;
+          if (kappa[last_word] < 0) kappa[last_word] = 0;
         }
       }
 
@@ -768,6 +769,7 @@ void *TrainEmb(void *id) {
     for (c = 0; c < layer1_size; c++) syn0[c + word * layer1_size] += neu1e[c];
     if (with_spec) {
       kappa[word] += spec_lambda * kappa_update;
+      if (kappa[word] < 0) kappa[word] = 0;
     }
 
     sentence_position++;
