@@ -21,7 +21,7 @@ You will need to first create a directory under `datasets` (e.g., `datasets/your
 
 ### Preprocessing
 
-You can use any tool to preprocess the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory.
+You can use any tool to preprocess the corpus (e.g. tokenization, lowercasing). If you do not have a specific idea, you can use our provided [preprocessing tool](preprocess). Simply add your corpus directory to [`auto_phrase.sh`](/preprocess/auto_phrase.sh#L16) and run it. The script assumes that the raw corpus is named `text.txt`, and will generate a phrase-segmented, lowercased corpus named `phrase_text.txt` under the same directory. If your corpus contains non-printable ASCII characters, you may use [this command](https://stackoverflow.com/a/27480803) to remove them.
 
 ### Pretrained Embedding (Optional)
 
